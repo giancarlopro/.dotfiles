@@ -212,6 +212,7 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
+  "theprimeagen/harpoon"
 }, {})
 
 -- [Giancarlo Rocha]
@@ -374,10 +375,10 @@ require('nvim-treesitter.configs').setup {
     swap = {
       enable = true,
       swap_next = {
-        ['<leader>a'] = '@parameter.inner',
+        ['<leader>n'] = '@parameter.inner',
       },
       swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
+        ['<leader>N'] = '@parameter.inner',
       },
     },
   },
@@ -554,5 +555,6 @@ vim.api.nvim_set_keymap('v', '<M-j>', ':m\'>+<CR>gv=gv', { noremap = true, silen
 
 require 'mappings'
 require 'settings'
+require 'harpoon_config'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

@@ -22,3 +22,7 @@ map('i', '<C-S>', '<C-O>:w<CR>', { noremap = true, silent = true })
 vim.cmd [[
   autocmd FileType python nnoremap <buffer> <F5> :!python %<CR>
 ]]
+
+-- Open netrw on current directory
+map('n', '<M-e>', ':Explore<CR>', { noremap = true, silent = true})
+
