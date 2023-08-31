@@ -19,9 +19,10 @@ alias dcu="docker-compose up -d --build"
 
 alias giga2="ssh palver@10.20.0.2"
 alias giga3="ssh palver@10.20.0.3"
+alias nv="nvim"
 
 export PATH="$PATH:/home/gian/.local/bin:$(go env GOBIN):$(go env GOPATH)/bin"
-export EDITOR=vim
+export EDITOR=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
