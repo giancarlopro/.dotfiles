@@ -12,7 +12,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-autosuggestions kubectl asdf autoswitch_virtualenv gitignore poetry docker)
 
 # Alias
-alias vimrc="vim ~/.zshrc"
+alias vimrc="nvim ~/.zshrc"
 alias sourcerc="source ~/.zshrc"
 alias dcd="docker-compose down"
 alias dcu="docker-compose up -d --build"
@@ -20,6 +20,12 @@ alias dcu="docker-compose up -d --build"
 alias giga2="ssh palver@10.20.0.2"
 alias giga3="ssh palver@10.20.0.3"
 alias nv="nvim"
+alias wakenote="wol 08:8f:c3:96:e9:97"
+alias note="ssh gian@192.168.3.7"
+alias dotcfg="nvim ~/.dotfiles"
+alias cns="kubectl config set-context --current --namespace"
+alias kg="kubectl get"
+alias kd="kubectl describe"
 
 export PATH="$PATH:/home/gian/.local/bin:$(go env GOBIN):$(go env GOPATH)/bin"
 export EDITOR=nvim
@@ -60,3 +66,10 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# bun completions
+[ -s "/home/gian/.bun/_bun" ] && source "/home/gian/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
