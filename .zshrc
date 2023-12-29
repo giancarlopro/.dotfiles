@@ -19,6 +19,8 @@ alias dcu="docker-compose up -d --build"
 
 alias giga2="ssh palver@10.20.0.2"
 alias giga3="ssh palver@10.20.0.3"
+alias personal="ssh gian@192.168.3.101"
+alias hetzner="ssh root@5.78.93.95"
 alias nv="nvim"
 alias wakenote="wol 08:8f:c3:96:e9:97"
 alias note="ssh gian@192.168.3.7"
@@ -26,9 +28,13 @@ alias dotcfg="nvim ~/.dotfiles"
 alias cns="kubectl config set-context --current --namespace"
 alias kg="kubectl get"
 alias kd="kubectl describe"
+alias wkdp="watch -n 1 kubectl describe pod"
+alias krrd="kubectl rollout restart deployment"
+alias krrs="kubectl rollout restart statefulset"
 
 export PATH="$PATH:/home/gian/.local/bin:$(go env GOBIN):$(go env GOPATH)/bin"
 export EDITOR=nvim
+export CLOUDSDK_PYTHON=python3.11
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -73,3 +79,6 @@ esac
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
