@@ -39,12 +39,6 @@ export CLOUDSDK_PYTHON=python3.11
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/gian/google-cloud-sdk/path.zsh.inc' ]; then . '/home/gian/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/gian/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/gian/google-cloud-sdk/completion.zsh.inc'; fi
-
 # source /home/gian/.oh-my-zsh/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 source $ZSH/oh-my-zsh.sh
@@ -57,13 +51,19 @@ function genpass() {
 
 # wsl2 path tracking
 keep_current_path() {
+  if ! command -v wslpath &> /dev/null; then
+    return 1
+  fi
+
   printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
 }
 precmd_functions+=(keep_current_path)
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-eval "$(github-copilot-cli alias -- "$0")"
+if command -v github-copilot-cli &> /dev/null; then
+  eval "$(github-copilot-cli alias -- "$0")"
+fi
 
 # pnpm
 export PNPM_HOME="/home/gian/.local/share/pnpm"
@@ -82,3 +82,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/gian/google-cloud-sdk/path.zsh.inc' ]; then . '/home/gian/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/gian/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/gian/google-cloud-sdk/completion.zsh.inc'; fi
