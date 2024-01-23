@@ -25,12 +25,25 @@ alias nv="nvim"
 alias wakenote="wol 08:8f:c3:96:e9:97"
 alias note="ssh gian@192.168.3.7"
 alias dotcfg="nvim ~/.dotfiles"
-alias cns="kubectl config set-context --current --namespace"
 alias kg="kubectl get"
 alias kd="kubectl describe"
 alias wkdp="watch -n 1 kubectl describe pod"
 alias krrd="kubectl rollout restart deployment"
 alias krrs="kubectl rollout restart statefulset"
+
+function cns() {
+  if [[ $# -eq 1 ]]; then
+    namespace=$1
+  else
+    namespace=$(kubectl get namespace -o custom-columns=":metadata.name" | fzf)
+  fi
+
+  if [[ -z $namespace ]]; then
+    exit 0
+  fi
+
+  kubectl config set-context --current --namespace $namespace
+}
 
 export PATH="$PATH:/home/gian/.local/bin:$(go env GOBIN):$(go env GOPATH)/bin"
 export EDITOR=nvim
