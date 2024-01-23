@@ -31,6 +31,9 @@ alias wkdp="watch -n 1 kubectl describe pod"
 alias krrd="kubectl rollout restart deployment"
 alias krrs="kubectl rollout restart statefulset"
 
+alias dt="generate_datetime"
+alias oid="generate_objectid"
+
 function cns() {
   if [[ $# -eq 1 ]]; then
     namespace=$1
