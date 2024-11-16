@@ -44,6 +44,7 @@ export CXX=g++
 export CODEFLASH_API_KEY='cf-2YkVRLCTV6Q5TqzFZNIU9KxYMmWRqdp25seXbtaezPn0KOjOSLSLCDZR9Q-krO1s'
 export HETZNER_TOKEN='5TMjCV4QLXbxHyaDtl118a4RvtIN5pmvUthX2BCXgs5xyDYcN46dXR0JuQOttiWZ'
 export TF_VAR_hetzner_token="$HETZNER_TOKEN"
+export CXXFLAGS="-Wno-narrowing"
 
 function cns() {
   if [[ $# -eq 1 ]]; then
@@ -65,6 +66,10 @@ function scale() {
 
 function klfl() {
   kubectl get pods -l "$1" --field-selector=status.phase=Running -o jsonpath='{.items[*].metadata.name}' | xargs -n 1 kubectl logs
+}
+
+function klean() {
+  kubectl get pod | grep "ContainerStatusUnknown\|OOMKilled\|Terminating\|Error\|OutOfcpu\|Completed\|Evicted" | awk '{print $1}' | xargs kubectl delete pod
 }
 
 function rr() {
@@ -129,7 +134,7 @@ function ugke() {
 }
 
 
-export PATH="$PATH:/home/gian/.local/bin:$(go env GOBIN):$(go env GOPATH)/bin:$HOME/.linkerd2/bin"
+export PATH="$PATH:/home/gian/.local/bin:$(go env GOBIN):$(go env GOPATH)/bin:$HOME/.linkerd2/bin:/opt/android-studio/bin:/home/gian/Android/Sdk/platform-tools"
 export EDITOR=nvim
 export CLOUDSDK_PYTHON=python3.11
 export AWS_ENDPOINT_URL=https://a151cac41de8d129e246200bf7005d56.r2.cloudflarestorage.com
@@ -181,11 +186,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/gian/google-cloud-sdk/path.zsh.inc' ]; then . '/home/gian/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/gian/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/gian/google-cloud-sdk/completion.zsh.inc'; fi
-
 # source "$HOME/.rye/env"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/gian/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/gian/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/gian/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/gian/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
